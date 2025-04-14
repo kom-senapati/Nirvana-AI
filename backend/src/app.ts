@@ -1,0 +1,24 @@
+import { PORT } from './config/env';
+import errorHandler from './middleware/error';
+
+import express, { type Request, type Response } from 'express';
+import morgan from 'morgan';
+
+const app = express();
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(morgan('dev'));
+
+app.get('/health', (req: Request, res: Response) => {
+   res.status(200).json({
+      status: 'OK',
+      timestamp: new Date().toISOString(),
+   });
+});
+
+app.use(errorHandler);
+
+app.listen(PORT, () => {
+   console.log(`Server is running at http://localhost:${PORT}`);
+});

@@ -14,7 +14,8 @@ export const addJournal = async (req: CustomRequest, res: Response, next: NextFu
          title,
          content,
       });
-      if (!journalEntry) return next(new ErrorResponse('Error occured while creating journal', 400));
+      if (!journalEntry)
+         return next(new ErrorResponse('Error occured while creating journal', 400));
 
       res.status(200).json({
          success: true,
@@ -109,7 +110,11 @@ export const updateJournal = async (req: CustomRequest, res: Response, next: Nex
    }
 };
 
-export const getJournalAnalytics = async (req: CustomRequest, res: Response, next: NextFunction) => {
+export const getJournalAnalytics = async (
+   req: CustomRequest,
+   res: Response,
+   next: NextFunction
+) => {
    const { userId } = req.params;
 
    try {
@@ -132,7 +137,9 @@ export const getJournalAnalytics = async (req: CustomRequest, res: Response, nex
       const totalEntries = await Journal.countDocuments({ userClerkId: userId });
 
       // 3. Streak Counter
-      const entries = await Journal.find({ userClerkId: userId }).sort({ createdAt: -1 }).select('createdAt');
+      const entries = await Journal.find({ userClerkId: userId })
+         .sort({ createdAt: -1 })
+         .select('createdAt');
 
       let streak = 0;
       let today = dayjs().startOf('day');
@@ -183,10 +190,16 @@ export const getJournalAnalytics = async (req: CustomRequest, res: Response, nex
          averageWordCount: Math.round(item.averageWordCount),
       }));
 
-      const overallAverageLength = Math.round(averageLengthPerDay.reduce((sum, d) => sum + d.averageWordCount, 0) / (averageLengthPerDay.length || 1));
+      const overallAverageLength = Math.round(
+         averageLengthPerDay.reduce((sum, d) => sum + d.averageWordCount, 0) /
+            (averageLengthPerDay.length || 1)
+      );
 
       // === RECENT ENTRIES LIST ===
-      const recentEntries = await Journal.find({ userClerkId: userId }).sort({ createdAt: -1 }).limit(10).lean();
+      const recentEntries = await Journal.find({ userClerkId: userId })
+         .sort({ createdAt: -1 })
+         .limit(10)
+         .lean();
 
       const recentFormatted = recentEntries.map((entry) => ({
          id: entry._id,

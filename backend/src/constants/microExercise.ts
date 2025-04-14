@@ -1,4 +1,11 @@
-export const SESSION_GOALS = ['Thought Challenger', 'Cognitive Distortion Detective', 'Gratitude Reframe', 'Values Alignment Check', 'Self-Compassion Break', 'Behavioral Activation Mini Plan'];
+export const SESSION_GOALS = [
+   'Thought Challenger',
+   'Cognitive Distortion Detective',
+   'Gratitude Reframe',
+   'Values Alignment Check',
+   'Self-Compassion Break',
+   'Behavioral Activation Mini Plan',
+];
 
 export const MICRO_EXERCISE_GENERATION_SCHEMA = JSON.stringify(
    {
@@ -83,7 +90,13 @@ export const MICRO_EXERCISE_REPORT_SCHEMA = JSON.stringify(
                mood_delta: { type: 'number' },
                emotion_shift_summary: { type: 'string' },
             },
-            required: ['mood_before', 'mood_after', 'primary_emotion', 'mood_delta', 'emotion_shift_summary'],
+            required: [
+               'mood_before',
+               'mood_after',
+               'primary_emotion',
+               'mood_delta',
+               'emotion_shift_summary',
+            ],
          },
          reflection_analysis: {
             type: 'object',
@@ -127,7 +140,13 @@ export const MICRO_EXERCISE_REPORT_SCHEMA = JSON.stringify(
                   items: { type: 'string' },
                },
             },
-            required: ['total_mcqs', 'correct_answers', 'score_percent', 'feedback', 'recommendations'],
+            required: [
+               'total_mcqs',
+               'correct_answers',
+               'score_percent',
+               'feedback',
+               'recommendations',
+            ],
          },
          final_reflection: {
             type: 'object',
@@ -153,7 +172,15 @@ export const MICRO_EXERCISE_REPORT_SCHEMA = JSON.stringify(
             required: ['progress_level', 'daily_streak', 'recommendations'],
          },
       },
-      required: ['header', 'mood_summary', 'reflection_analysis', 'exercise_qna', 'mcq_evaluation', 'final_reflection', 'progress_insights'],
+      required: [
+         'header',
+         'mood_summary',
+         'reflection_analysis',
+         'exercise_qna',
+         'mcq_evaluation',
+         'final_reflection',
+         'progress_insights',
+      ],
    },
    null,
    4

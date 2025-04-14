@@ -12,7 +12,11 @@ const storage = multer.diskStorage({
    },
 });
 
-const fileFilter = (req: Express.Request, file: Express.Multer.File, cb: multer.FileFilterCallback) => {
+const fileFilter = (
+   req: Express.Request,
+   file: Express.Multer.File,
+   cb: multer.FileFilterCallback
+) => {
    const allowedMime = 'audio/wav';
    const ext = path.extname(file.originalname).toLowerCase();
    const allowedExts = ['.wav'];

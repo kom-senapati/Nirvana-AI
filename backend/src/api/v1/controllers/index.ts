@@ -5,4 +5,11 @@ import * as chatbotController from './chatbot.controller';
 import * as chatController from './chat.controller';
 import * as microExerciseController from './microExercise.controller';
 
-export { transcribeController, userController, journalController, chatbotController, chatController, microExerciseController };
+export {
+   transcribeController,
+   userController,
+   journalController,
+   chatbotController,
+   chatController,
+   microExerciseController,
+};

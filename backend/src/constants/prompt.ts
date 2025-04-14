@@ -62,7 +62,12 @@ export const getUserPromptForReportGeneration = ({
    filledMicroExercise,
    pastReports = [],
    pastConversations = [],
-}: { user: User; filledMicroExercise: MicroExercise; pastReports: Report[]; pastConversations: Chat[] }) => {
+}: {
+   user: User;
+   filledMicroExercise: MicroExercise;
+   pastReports: Report[];
+   pastConversations: Chat[];
+}) => {
    return `Generate a CBT micro-exercise report for the following user input.
 
 Use the structure provided in the schema and reflect the user's progress, emotional change, and behavior patterns. Base your analysis on:

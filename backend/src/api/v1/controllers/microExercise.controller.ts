@@ -1,7 +1,15 @@
 import type { NextFunction, Response } from 'express';
 import { OBJECT_GENERATION_MODEL } from '../../../constants/llms';
-import { MICRO_EXERCISE_GENERATION_SCHEMA, MICRO_EXERCISE_REPORT_SCHEMA, SESSION_GOALS } from '../../../constants/microExercise';
-import { getUserPromptForReportGeneration, MICRO_EXERCISE_REPORT_PROMPT, MICRO_EXERCISE_SYSTEM_PROMPT } from '../../../constants/prompt';
+import {
+   MICRO_EXERCISE_GENERATION_SCHEMA,
+   MICRO_EXERCISE_REPORT_SCHEMA,
+   SESSION_GOALS,
+} from '../../../constants/microExercise';
+import {
+   getUserPromptForReportGeneration,
+   MICRO_EXERCISE_REPORT_PROMPT,
+   MICRO_EXERCISE_SYSTEM_PROMPT,
+} from '../../../constants/prompt';
 import ErrorResponse from '../../../helper/errorResponse';
 import { groq } from '../../../lib/groq';
 import type { CustomRequest } from '../../../types';
@@ -10,7 +18,11 @@ import { MicroExercise } from '../models/microExercise.model';
 import { Report } from '../models/report.model';
 import { User } from '../models/user.model';
 
-export const generateMicroExercise = async (req: CustomRequest, res: Response, next: NextFunction) => {
+export const generateMicroExercise = async (
+   req: CustomRequest,
+   res: Response,
+   next: NextFunction
+) => {
    try {
       const session_goal = SESSION_GOALS[Math.floor(Math.random() * SESSION_GOALS.length)];
 
@@ -41,7 +53,11 @@ export const generateMicroExercise = async (req: CustomRequest, res: Response, n
    }
 };
 
-export const saveMicroExerciseWithReport = async (req: CustomRequest, res: Response, next: NextFunction) => {
+export const saveMicroExerciseWithReport = async (
+   req: CustomRequest,
+   res: Response,
+   next: NextFunction
+) => {
    try {
       const { userId } = req.params;
       const filledMicroExercise = req.value;
@@ -63,7 +79,12 @@ export const saveMicroExerciseWithReport = async (req: CustomRequest, res: Respo
             { role: 'system', content: systemPrompt },
             {
                role: 'user',
-               content: getUserPromptForReportGeneration({ user, filledMicroExercise, pastConversations: messages, pastReports: reports }),
+               content: getUserPromptForReportGeneration({
+                  user,
+                  filledMicroExercise,
+                  pastConversations: messages,
+                  pastReports: reports,
+               }),
             },
          ],
       });
@@ -90,7 +111,11 @@ export const saveMicroExerciseWithReport = async (req: CustomRequest, res: Respo
    }
 };
 
-export const getUserMicroExercises = async (req: CustomRequest, res: Response, next: NextFunction) => {
+export const getUserMicroExercises = async (
+   req: CustomRequest,
+   res: Response,
+   next: NextFunction
+) => {
    try {
       const { userId } = req.params;
 
@@ -105,7 +130,11 @@ export const getUserMicroExercises = async (req: CustomRequest, res: Response, n
    }
 };
 
-export const getMicroExerciseById = async (req: CustomRequest, res: Response, next: NextFunction) => {
+export const getMicroExerciseById = async (
+   req: CustomRequest,
+   res: Response,
+   next: NextFunction
+) => {
    try {
       const { userId, microExerciseId } = req.params;
 
@@ -125,7 +154,11 @@ export const getMicroExerciseById = async (req: CustomRequest, res: Response, ne
    }
 };
 
-export const deleteMicroExercise = async (req: CustomRequest, res: Response, next: NextFunction) => {
+export const deleteMicroExercise = async (
+   req: CustomRequest,
+   res: Response,
+   next: NextFunction
+) => {
    try {
       const { userId, microExerciseId } = req.params;
 

@@ -1,3 +1,4 @@
+import router from './api/v1/routes';
 import { PORT } from './config/env';
 import errorHandler from './middleware/error';
 
@@ -17,6 +18,7 @@ app.get('/health', (req: Request, res: Response) => {
    });
 });
 
+app.use('/api/v1', router);
 app.use(errorHandler);
 
 app.listen(PORT, () => {
